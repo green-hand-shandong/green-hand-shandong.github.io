@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="hexo，博客， 代码， 数据结构， 算法" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>
+        线性表 |  课设作业
+      </title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+ 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+ 
+<link rel="stylesheet" href="/css/custom.css">
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+ 
+
+    <link rel="alternate" href="/atom.xml" title="课设作业" type="application/atom+xml">
+</head>
+
+    <link rel="stylesheet" href="/css/tags.css" media="all" />
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-线性表"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  线性表
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/25/%E7%BA%BF%E6%80%A7%E8%A1%A8/" class="article-date">
+  <time datetime="2020-07-25T04:59:28.000Z" itemprop="datePublished">2020-07-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/DS/">DS</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">5 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="00-高频考点"><a href="#00-高频考点" class="headerlink" title="00  高频考点"></a>00  高频考点</h3><ul>
+<li>线性表、顺序表的概念特点（选、填） 以及 *<em>基础算法（算法设计）(遍历、查找、插入、删除、逆置 *</em><ul>
+<li>10 % 期末 —— <strong>30 %考研</strong> </li>
+</ul>
+</li>
+</ul>
+<h3 id="01-知识"><a href="#01-知识" class="headerlink" title="01 知识"></a>01 知识</h3><ul>
+<li><p>线性结构 —— 排队、打印机队列(Queue)、一摞碗(Stack)</p>
+<ul>
+<li>第一个元素无前驱</li>
+<li>最后一个无后继</li>
+<li>中间，一个直接前驱，一个直接后继</li>
+</ul>
+</li>
+<li><p>线性表Linear_list — 相同数据类型的<strong>n</strong>个数据元素序列(<strong>a0</strong>,a1,a2,a3…，<strong>a_(n-1)</strong>)</p>
+<ul>
+<li>首节点 a0</li>
+<li>尾结点a（n-1）</li>
+<li>空表</li>
+<li>位序(编号 0 ~ n-1)</li>
+</ul>
+</li>
+<li><p>线性表存储分类 —— 顺序表 + 链表</p>
+<ul>
+<li><p>顺序表</p>
+<ul>
+<li>一维数组(通常动态数组)实现，<strong>定长的</strong></li>
+<li>物理位置相邻</li>
+<li>表示变量<ul>
+<li>data 指向线性表的指针 （基地址）</li>
+<li>current_length：表长</li>
+<li>Max_Size : 容量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>顺序表操作 —— <strong>特别注意操作合法性和边界条件</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化顺序表  T(n) —— S(n)</span></span><br><span class="line">maxSize = initSize;</span><br><span class="line">data = <span class="keyword">new</span> elemType[maxSize];</span><br><span class="line">currentLength = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 01 遍历 O(n) —— O(1)</span></span><br><span class="line"><span class="keyword">if</span>(currentLength == <span class="number">0</span>)</span><br><span class="line">    	<span class="keyword">return</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; currentLength;++i)&#123;</span><br><span class="line">	visit(data[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 02 查找 O(n)_遍历 —— O(1)</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; currentLength;++i)&#123;</span><br><span class="line">	<span class="keyword">if</span>(val == a[i])		<span class="keyword">return</span> i;</span><br><span class="line">    <span class="keyword">else</span> 				<span class="keyword">return</span> <span class="number">-1</span>;<span class="comment">// -1是非法位置</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 03 插入 O(n) —— O(1)</span></span><br><span class="line">	<span class="comment">// i == 0 —— O(n) —— 移动n次</span></span><br><span class="line">	<span class="comment">// i == currentLength —— O(1) —— 移动 0次</span></span><br><span class="line"><span class="comment">// 平均移动 n/2  == (n + n-1 + .. + 1 +0) / (n+1)</span></span><br><span class="line"><span class="comment">// 合法边界  0~n-1 和 n</span></span><br><span class="line"><span class="comment">// 不能让线性表断开，不能失去物理位置的连续性</span></span><br><span class="line"><span class="comment">// 特别 —— 表满了的时候 —— 再申请空间</span></span><br><span class="line"><span class="keyword">if</span>(idx&lt;<span class="number">0</span> || idx &gt;currentLength) <span class="keyword">throw</span> outofRange(); <span class="comment">// 抛出异常</span></span><br><span class="line"><span class="keyword">if</span>(currentLength == Max_Size) resize();<span class="comment">//扩大表空间 / 或者直接报错</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = currentLength<span class="number">-1</span>;i&gt;idx;--i)&#123;</span><br><span class="line">    <span class="comment">// 从后面移动 idx -- currentLength-1</span></span><br><span class="line">    data[i+<span class="number">1</span>] = data[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data[idx<span class="number">-1</span>] = val;</span><br><span class="line">++currentLength; <span class="comment">// 注意更新顺序表的信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 04 删除 O(n) —— O(1)</span></span><br><span class="line"><span class="comment">// 空？ // 合法位置？  0~currentLength-1  // 移动补空，保持物理位置连续 </span></span><br><span class="line"><span class="comment">// 更新currentLenght</span></span><br><span class="line"><span class="keyword">if</span>(i&lt;<span class="number">0</span> || i&gt; current<span class="number">-1</span>)		<span class="keyword">throw</span> outofRange()；</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=idx;i&lt;currentLength<span class="number">-1</span>;++i)&#123;</span><br><span class="line">    <span class="comment">// 不能是 = currentLength-1 </span></span><br><span class="line">    <span class="comment">//—— 相当于把currentLength位置的值传给currnet-1</span></span><br><span class="line">	data[j] == data[j+<span class="number">1</span>];</span><br><span class="line">&#125;<span class="comment">//平均移动 (n-1)/2 == (n-1 + ... + 0)/n</span></span><br><span class="line">--currentLength;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 05 逆置 O(n/2) O(n) —— O(1) </span></span><br><span class="line"><span class="comment">// 两头赶， 两两交换 —— 交换 n/2 次(向下取整)</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>; i&lt;currentLength/<span class="number">2</span>; ++i)&#123;</span><br><span class="line">	swap(data[i], data[currnetLength-i<span class="number">-1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>预先分配空间</p>
+<ul>
+<li>逻辑顺序符合存储顺序</li>
+<li>可随机读取 O(1)</li>
+<li><strong>插入n/2 删除(n-1)/2</strong> 需要移动大量数据</li>
+<li>适合静态的，经常进行定位的线性表</li>
+</ul>
+</li>
+<li><p>链表 —— 值域 + 指针域 (<strong>特务单线联系</strong>)</p>
+<ul>
+<li><p>指针实现，变长的<strong>（用时申请，用完释放）</strong></p>
+</li>
+<li><p>01 单链表 逻辑相邻只能看后继</p>
+</li>
+<li><p>02 双链表 逻辑相邻前驱后继都可</p>
+</li>
+<li><p>03 循环链表 表尾指向表头节点 —— <strong>环</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-习题"><a href="#02-习题" class="headerlink" title="02 习题"></a>02 习题</h3><ul>
+<li>顺序存储，存储密度大。链表(元素+指针)</li>
+<li>顺序存储，不利于插入、删除</li>
+<li>访问O(1)，插入n/2删除 (n-1)/2 —— O(n)</li>
+<li><strong>合并非递减有序顺序表A、B到A——经典算法</strong><ul>
+<li>高效 —— 最大限度避免移动元素</li>
+<li>01 B中摘出来，插入A中。—— 不好<ul>
+<li><strong>倒着遍历 —— 移动少！</strong></li>
+<li>并且考虑A、B长度不同时</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> m,n,i,j;</span><br><span class="line">m = A.length; i = m<span class="number">-1</span>;</span><br><span class="line">n = B.lenght; j = n<span class="number">-1</span>;</span><br><span class="line"><span class="keyword">int</span> k = m+n<span class="number">-1</span>;</span><br><span class="line"><span class="keyword">if</span>(m+n &gt; A.MaxSize)	resize();</span><br><span class="line"><span class="keyword">while</span>(i&gt;<span class="number">0</span> &amp;&amp; j&gt;<span class="number">0</span>)&#123;</span><br><span class="line">	<span class="keyword">if</span>(A.data[i]&gt;B.data[j])		A.data[k--] = A.data[i--];</span><br><span class="line">    <span class="keyword">else</span>					   A.data[k--] = B.data[j--];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span>(j&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">    <span class="comment">// A有余不用动 // 此处处理B有余的</span></span><br><span class="line">    A.data[k--] = B.data[j--];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度 —— O(m+n) </p>
+<p>空间复杂度 —— O(1)</p>
+<ul>
+<li><p>删除线性表中所有职位item的数据元素。要求 O(n) —— O(1)</p>
+<ul>
+<li><p>01 普通顺序表删除，但是删除的最差情况O(n^2)</p>
+</li>
+<li><p>02 《王道》里见过的，碰到item就移动覆盖，最后更新currentLength。</p>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>+ 03 两个指针对着走，item被后面的覆盖。
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j=currentLength;</span><br><span class="line"><span class="keyword">while</span>(i&lt;=j)&#123;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;=j &amp;&amp; data[i]!=item) 	i++; <span class="comment">// 从前面找到itme</span></span><br><span class="line">    <span class="keyword">while</span>(i&lt;=j &amp;&amp; data[j]==item)	j--; <span class="comment">// 从后面找到不是item</span></span><br><span class="line">    <span class="keyword">if</span>(i&lt;j)		</span><br><span class="line">        data[i++] = data[j--];			<span class="comment">//  前面的item被覆盖</span></span><br><span class="line">&#125;</span><br><span class="line">currentLength = i;</span><br><span class="line"><span class="comment">// 但是改变相对位置， 不稳定。</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;	<span class="comment">// j 工作指针； i 看着item</span></span><br><span class="line"><span class="keyword">while</span>(j&lt;n)&#123;	<span class="comment">//遍历</span></span><br><span class="line">	<span class="keyword">if</span>(data[j]==item)	j++;<span class="comment">// 找到item 则不管</span></span><br><span class="line">    <span class="keyword">else</span>				data[i++] = data[j++];<span class="comment">// 不是item就移到前面, 覆盖掉i(item).</span></span><br><span class="line">&#125;</span><br><span class="line">currentLength = i; <span class="comment">// 更新信息</span></span><br><span class="line"><span class="comment">// 不改变相对位置。</span></span><br></pre></td></tr></table></figure></code></pre><ul>
+<li><p>要求。(a0,a1….an)  ——&gt; (ap,…a0,ap-1)</p>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 巧用逆置 0~n-1，0~p-1，p~n-1</span></span><br><span class="line"><span class="comment">// O(n) —— O(1)</span></span><br><span class="line"><span class="comment">// 逆置</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n/<span class="number">2</span>; ++i)&#123;		<span class="comment">// n/2</span></span><br><span class="line">	swap(data[i],data[n-i<span class="number">-1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li>顺序表，物理位置相邻来表示逻辑上相邻的关系。<ul>
+<li>链式，通过指针/地址实现</li>
+</ul>
+</li>
+</ul>
+<h1 id=""><a href="#" class="headerlink" title=""></a></h1> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/07/25/%E7%BA%BF%E6%80%A7%E8%A1%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/" rel="tag">线性表</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/07/25/%E9%80%89%E6%8B%A9-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            选择/归并排序
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/25/c-cpp/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">c/c++学习</div>
+      </a>
+    
+  </nav>
+
+  
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> 高熙旺1999
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="课设作业"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签云</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/playlist">歌单</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+  </div>
+
+</body>
+
+</html>

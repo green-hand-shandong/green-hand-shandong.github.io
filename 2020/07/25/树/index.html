@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="hexo，博客， 代码， 数据结构， 算法" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>
+        应用题高频考点 |  课设作业
+      </title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+ 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+ 
+<link rel="stylesheet" href="/css/custom.css">
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+ 
+
+    <link rel="alternate" href="/atom.xml" title="课设作业" type="application/atom+xml">
+</head>
+
+    <link rel="stylesheet" href="/css/tags.css" media="all" />
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-树"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  应用题高频考点
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/25/%E6%A0%91/" class="article-date">
+  <time datetime="2020-07-25T04:59:28.000Z" itemprop="datePublished">2020-07-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/DS/">DS</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">11 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="01-树"><a href="#01-树" class="headerlink" title="01 树"></a>01 树</h2><h3 id="前中后层次遍历"><a href="#前中后层次遍历" class="headerlink" title="前中后层次遍历"></a>前中后层次遍历</h3><ul>
+<li><p>子树，NLR、LNR、LRN的领会（递归）</p>
+</li>
+<li><p>有时候把左子树抽象成左孩子，直至叶子变N</p>
+</li>
+<li><p>前序 NLR，先最左边一道，再是从下到上的子树，再是右边，从上到下的子树</p>
+</li>
+<li><p>中序 LNR，第一个是最左边的结点，后面拐入右子树（由下到上），</p>
+</li>
+<li><p>后序 LRN，第一个是</p>
+</li>
+<li><p>层次遍历 —— 编号序列</p>
+</li>
+</ul>
+<h3 id="中序-前-后序-，得到树"><a href="#中序-前-后序-，得到树" class="headerlink" title="中序 + 前/后序 ，得到树"></a>中序 + 前/后序 ，得到树</h3><ul>
+<li>根节点位置特别注意，中序序列，根划分子树。前/后序容易找根。</li>
+<li>不断用“根”分割左右子树集合，直至叶子变N</li>
+</ul>
+<h3 id="森林转换二叉树"><a href="#森林转换二叉树" class="headerlink" title="森林转换二叉树"></a>森林转换二叉树</h3><ul>
+<li>连线，<ul>
+<li>根节点兄弟之间。</li>
+<li>森林子树的同层兄弟之间</li>
+</ul>
+</li>
+<li>删线，<ul>
+<li>删除根节点和非First Child之间（左孩子右兄弟表示法）</li>
+<li>专门看那些不是一个孩子的结点。</li>
+<li>有孩子没有兄弟的结点就只剩下左子树</li>
+</ul>
+</li>
+<li>旋转，顺时针 45 °</li>
+</ul>
+<h3 id="二叉树转换成森林"><a href="#二叉树转换成森林" class="headerlink" title="二叉树转换成森林"></a>二叉树转换成森林</h3><ul>
+<li>删线，删除根节点和右孩子的连线</li>
+<li>连线，连接根节点和他的非first Child结点<ul>
+<li>first child的右兄弟们</li>
+</ul>
+</li>
+<li>旋转</li>
+<li>注意<ul>
+<li>森林的第一棵树：根节点 + 左子树</li>
+<li>右子树是别的树们。（递归定义）</li>
+<li>右边那一道上全是森林的子树根节点</li>
+</ul>
+</li>
+</ul>
+<h3 id="后序遍历森林"><a href="#后序遍历森林" class="headerlink" title="后序遍历森林"></a>后序遍历森林</h3><ul>
+<li>相当于<strong>中序遍历二叉树</strong></li>
+<li>相当于<strong>挨个后序遍历森林的子树</strong></li>
+</ul>
+<h3 id="前序遍历森林"><a href="#前序遍历森林" class="headerlink" title="前序遍历森林"></a>前序遍历森林</h3><ul>
+<li><strong>前序遍历二叉树</strong></li>
+<li>前序遍历森林的子树</li>
+</ul>
+<h3 id="先根-后跟森林，画出森林"><a href="#先根-后跟森林，画出森林" class="headerlink" title="先根 + 后跟森林，画出森林"></a>先根 + 后跟森林，画出森林</h3><ul>
+<li>先画森林二叉树<ul>
+<li>先根森林 —— 先根二叉树</li>
+<li>后跟森林 —— 中根二叉树</li>
+</ul>
+</li>
+<li>先根找根，中根分割子树，直至叶子变根节点</li>
+<li>森林二叉树拆解成森林子树二叉树<ul>
+<li>删线(所有右枝)—— 加线(根到孩子) —— 旋转</li>
+</ul>
+</li>
+</ul>
+<h3 id="画Huffman-树、"><a href="#画Huffman-树、" class="headerlink" title="画Huffman 树、"></a>画Huffman 树、</h3><ul>
+<li><p>树型不唯一，WPL唯一</p>
+</li>
+<li><p>频率作权值，</p>
+<ul>
+<li>有时候频率是整数、有时小数(累加和==1)</li>
+</ul>
+</li>
+<li><p>挑最小的两个作孩子合并成新的单位</p>
+<ul>
+<li>左小右大 —— 老师判题方便</li>
+</ul>
+</li>
+<li><p>挑最小的两个的时候，容易<strong>脑抽</strong></p>
+</li>
+<li><p>大的近，小的远</p>
+</li>
+</ul>
+<h3 id="写Huffman编码、"><a href="#写Huffman编码、" class="headerlink" title="写Huffman编码、"></a>写Huffman编码、</h3><ul>
+<li>左分支 —— 0</li>
+<li>右分支 —— 1</li>
+<li>从根到叶子读取、从上到下</li>
+</ul>
+<h3 id="求树的WPL"><a href="#求树的WPL" class="headerlink" title="求树的WPL"></a>求树的WPL</h3><ul>
+<li>Σ 叶子结点WPL</li>
+<li>WPL = 权值 *  路径长度</li>
+<li>路径长度 —— 在第几层</li>
+</ul>
+<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><ul>
+<li><strong>完全二叉树</strong>  +  双亲 &lt; 两个孩子  或者  双亲 &gt; 两个孩子</li>
+<li>实现优先级队列</li>
+</ul>
+<h4 id="插入堆"><a href="#插入堆" class="headerlink" title="插入堆"></a>插入堆</h4><ul>
+<li>叶子处，最后一层找</li>
+<li><strong>从下向上调整</strong>。</li>
+</ul>
+<h4 id="删除堆元素"><a href="#删除堆元素" class="headerlink" title="删除堆元素"></a>删除堆元素</h4><ul>
+<li>向下调整</li>
+<li>删除树根<ul>
+<li>和尾巴交换，再调整（由根向下）</li>
+<li>再删去最后一个位置（此时存的是原根）</li>
+</ul>
+</li>
+</ul>
+<h4 id="建立堆"><a href="#建立堆" class="headerlink" title="建立堆"></a>建立堆</h4><ul>
+<li>序列 写成完全二叉树</li>
+<li>再调整<ul>
+<li>从最后一个非叶子结点开始，向<strong>前</strong>调整</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>二叉树遍历</li>
+<li>遍历序列画树</li>
+<li>树和森林转换</li>
+<li>森林的遍历</li>
+<li>画森林</li>
+<li>Huffman树和编码和WPL</li>
+<li>Heap</li>
+</ul>
+<h2 id="02-集合结构"><a href="#02-集合结构" class="headerlink" title="02 集合结构"></a>02 集合结构</h2><p>查找、排序、散列表</p>
+<h3 id="折半查找的判定树"><a href="#折半查找的判定树" class="headerlink" title="折半查找的判定树"></a>折半查找的判定树</h3><ul>
+<li>有序表 + 顺序结构</li>
+</ul>
+<h4 id="画判定树"><a href="#画判定树" class="headerlink" title="画判定树"></a>画判定树</h4><ul>
+<li>mid —— root 来分割左右子树集合，直到叶子</li>
+<li><strong>注意根节点是mid对应的</strong></li>
+</ul>
+<h4 id="平均查找长度"><a href="#平均查找长度" class="headerlink" title="平均查找长度"></a>平均查找长度</h4><ul>
+<li>成功<ul>
+<li>ASL_success == $\frac{1}{结点个数}<em>\sum(层数</em>每层有多少个结点)$</li>
+</ul>
+</li>
+<li>失败<ul>
+<li>ASL_loss        ==$\frac{1}{外部结点个数}<em>\sum{[(层数-1)</em>该层的外部结点个数]}$</li>
+<li>外部结点 —— 全是叶子结点 n0<ul>
+<li>n0 = n2 + 1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="查找路径"><a href="#查找路径" class="headerlink" title="查找路径"></a>查找路径</h4><ul>
+<li>单支树</li>
+<li>mid —— root</li>
+</ul>
+<h3 id="散列表"><a href="#散列表" class="headerlink" title="散列表"></a>散列表</h3><ul>
+<li>H(key) = 3*KEY  mod  p<ul>
+<li><strong>mod 实现逻辑上的循环</strong></li>
+</ul>
+</li>
+<li>散列地址 —— 0 ~ m-1</li>
+<li>函数能算出来的 —— 0 ~ p-1</li>
+</ul>
+<ul>
+<li>对于冲突<ul>
+<li>线性探测法  —— di</li>
+<li>链地址法      —— 单链表</li>
+</ul>
+</li>
+<li>求ASL<ul>
+<li>先画这个</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>散列地址</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>…</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>关键字</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>比较次数</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>注意比较次数，<ul>
+<li>一次性插入成功 —— 比较一次</li>
+<li>和空位比较也算比较次数</li>
+</ul>
+</li>
+<li>线性探测<ul>
+<li>ASL_success  =  1/元素个数 * （ 总的比较次数累加_元素个数个 ）</li>
+<li>ASL_loss         =  1/P * 总的比较次数累加_p个<ul>
+<li>注意空的比较次数是1</li>
+<li>不是空的需要比到空（空的也算一次）</li>
+<li>注意不是 m个，是 p个（能用函数到达的）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>链地址法<ul>
+<li>ASL_s == Σ ( 单链表第K个 * K )    *    1 / 结点个<ul>
+<li>不算结点表的空结点</li>
+</ul>
+</li>
+<li>ASL_l  == Σ ( 第K个结点 * (K+1) )  *   1 / p<ul>
+<li>到NULL比一次的时候，才知道是比较结束</li>
+<li>结点表里的空结点算一次</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="排序方法-amp-排序结果"><a href="#排序方法-amp-排序结果" class="headerlink" title="排序方法 &amp; 排序结果"></a>排序方法 &amp; 排序结果</h3><h4 id="排序结果-到排序方法"><a href="#排序结果-到排序方法" class="headerlink" title="排序结果 到排序方法"></a>排序结果 到排序方法</h4><ul>
+<li>有几个找到最终位置的？</li>
+<li>冒泡？<ul>
+<li>是否有交换</li>
+<li>最后面是不是有序了</li>
+</ul>
+</li>
+<li>选择？<ul>
+<li>有序段 + 无序段</li>
+<li>无序段 + 有序段</li>
+<li>选中之后是<strong>交换</strong></li>
+</ul>
+</li>
+<li>快速？<ul>
+<li>pivot一趟定一个<ul>
+<li>课本上是选择最左边的</li>
+</ul>
+</li>
+<li>pivot 前小于pivot，后大于pivot</li>
+<li>high、low两头跑，</li>
+<li>先high，后low，</li>
+<li>反常赋给没动的，</li>
+<li>==找到pivot</li>
+</ul>
+</li>
+</ul>
+<h4 id="同一序列，不同方法"><a href="#同一序列，不同方法" class="headerlink" title="同一序列，不同方法"></a>同一序列，不同方法</h4><ul>
+<li><p>直接插入排序</p>
+<ul>
+<li>最初定第一个是有序序列</li>
+<li>然后，选无序序列的第一个插入<ul>
+<li>从有序序列，<strong>后往前</strong>找</li>
+</ul>
+</li>
+<li>第一趟之后，有序序列变 <strong>2 个</strong></li>
+</ul>
+</li>
+<li><p>希尔排序</p>
+<ul>
+<li>定增量，</li>
+<li>间隔为增量的小组，一共有增量个<ul>
+<li>变小组间有序</li>
+</ul>
+</li>
+<li>增量 == 1 —— 直接插入排序</li>
+</ul>
+</li>
+<li><p>起泡排序</p>
+<ul>
+<li><strong>方向</strong><ul>
+<li>从右往左，一趟定一个最值到最前面</li>
+<li>从左网友，一趟定一个最值到最后面</li>
+</ul>
+</li>
+<li>不断比较两个相邻的元素，调整两个元素的顺序</li>
+</ul>
+</li>
+<li><p>快速排序</p>
+<ul>
+<li>pivot选取<ul>
+<li>一次定一个pivot</li>
+</ul>
+</li>
+<li>low、high 两头走。<ul>
+<li>相等时，是pivot的位置。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>直接选择</p>
+<ul>
+<li>遍历选取一个最值</li>
+<li>和最前面的交换，形成有序序列</li>
+</ul>
+</li>
+<li><p>归并排序</p>
+<ul>
+<li>默认2路归并<ul>
+<li>每一次相邻的两个有序段（初始为1），归并成一个</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>堆排序</p>
+<ul>
+<li><p>默认从小到大排序 —— 最大堆/大根堆</p>
+<ul>
+<li><p>建立堆，（<strong>完全二叉树</strong>）调整（<strong>从最大的非叶子结点</strong>，编号–）</p>
+</li>
+<li><p>堆顶（<strong>根节点</strong>）取，和最后的结点（<strong>编号最大的叶子</strong>）<strong>交换</strong>，</p>
+<p>   从上到下调整，得到<strong>第一趟排序的结果（调整堆完毕的）</strong>。</p>
+<ul>
+<li>有序的在最后面</li>
+<li>调整是和孩子中  大的/小的  交换</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="稳定性和性能"><a href="#稳定性和性能" class="headerlink" title="稳定性和性能"></a>稳定性和性能</h4><ul>
+<li>堆排序<ul>
+<li>没有额外空间 O(1)</li>
+<li>不稳定</li>
+<li></li>
+</ul>
+</li>
+<li>快速排序<ul>
+<li>使用递归工作栈(系统的)，O(log2(n))</li>
+<li>不稳定</li>
+<li>平均最快</li>
+<li>最差 O(n^2)</li>
+</ul>
+</li>
+<li>归并排序<ul>
+<li>使用辅助数组 —— O(n)</li>
+<li>稳定</li>
+<li>O(n*log2(n))</li>
+</ul>
+</li>
+</ul>
+<p>![image-20200528211942961](C:\Users\gao xiwang\AppData\Roaming\Typora\typora-user-images\image-20200528211942961.png)</p>
+<ul>
+<li><p><strong>稳定的（常考）</strong> —— 归并、直接插入、冒泡</p>
+</li>
+<li><p>额外空间 —— 快速排序、归并排序</p>
+</li>
+<li><p>不变的O(n^2) —— 直接插入、冒泡、直接选择、</p>
+</li>
+<li><p>不变的O(n*log2(n)) —— 堆、归并</p>
+</li>
+<li><p>希尔排序 —— O(n^1.3)   (gap /= 2) —— 和gap有关</p>
+</li>
+<li><p>变化的</p>
+<ul>
+<li>快速排序 —— 平均O(n*log2(n))、最差 O(n^2)</li>
+</ul>
+</li>
+<li><p>躺数和最初形态有关的</p>
+<ul>
+<li><strong>优化过的</strong>冒泡</li>
+<li>快速排序</li>
+</ul>
+</li>
+<li><p>基本有序的，对直接插入和希尔排序算法时间有帮助，<strong>趟数没帮助</strong></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/Xieyang-blog/p/8340578.html" target="_blank" rel="noopener">https://www.cnblogs.com/Xieyang-blog/p/8340578.html</a></p>
+<p>   ​      </p>
+<pre><code>![img](https://uploadfiles.nowcoder.com/images/20190424/134156974_1556120409231_E69713B3B16599EC8758DB25FC06963D)
+
++ **无关**
++ 比较次数 —— 选择、基数
++ 移动次数 —— 归并、基数
++ 趟数        —— **除了** 冒泡(优化后)、快速
++ 算法复杂度 —— 选择、归并、堆、基数
++ **无关**</code></pre></li>
+</ul>
+<h3 id="二叉查找树-二叉排序树"><a href="#二叉查找树-二叉排序树" class="headerlink" title="二叉查找树/二叉排序树"></a>二叉查找树/二叉排序树</h3><ul>
+<li>L&lt;N&lt;R —— 中序遍历得到有序序列从小到大</li>
+<li><strong>从大到小？</strong><ul>
+<li>RNL 顺序遍历得到</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>非空 <ul>
+<li>in_Order( 左子树 )</li>
+<li>访问root</li>
+<li>in_Order( 右子树 ) </li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="构造"><a href="#构造" class="headerlink" title="构造"></a>构造</h4><ul>
+<li>序列顺序输入<ul>
+<li>二叉判定树，不是按照序列顺序，而是mid作root</li>
+</ul>
+</li>
+<li>大了往右</li>
+<li>小了往左</li>
+</ul>
+<h4 id="ASL-success"><a href="#ASL-success" class="headerlink" title="ASL_success"></a>ASL_success</h4><ul>
+<li>== 1/元素个数  *  (层次 * 层次含有结点个数)</li>
+</ul>
+<h4 id="ASL-loss"><a href="#ASL-loss" class="headerlink" title="ASL_loss"></a>ASL_loss</h4><ul>
+<li>先正则化</li>
+<li>== 1/元素个数 * Σ( （层次-1） *  该层结点数目  )</li>
+</ul>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><ul>
+<li>叶子</li>
+<li>一个孩子</li>
+<li>两个孩子<ul>
+<li>左子树的最大值 —— 左子树最右边的叶子</li>
+<li>右子树的最小值 —— 右子树最左边的叶子</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>折半查找判定树，ASL</li>
+<li>散列表 + ASL</li>
+<li>排序算法</li>
+<li>二叉查找树</li>
+</ul>
+<h2 id="03-图"><a href="#03-图" class="headerlink" title="03 图"></a>03 图</h2><h3 id="DFS、BFS"><a href="#DFS、BFS" class="headerlink" title="DFS、BFS"></a>DFS、BFS</h3><ul>
+<li><p>邻接表</p>
+<ul>
+<li>顶点表 —— 所有顶点  + 指向边表的指针</li>
+<li>边表    ——  顶点的邻接点们，出边的指向 (出度) </li>
+<li>DFS —— 顶点 – 边表中一个 – 顶点 – 边表中一个</li>
+<li>BFS —— 顶点–遍历顶点的边表 – 遍历边表结点的边表</li>
+</ul>
+</li>
+<li><p>邻接矩阵</p>
+</li>
+<li><p>BFS、DFS生成树</p>
+</li>
+</ul>
+<h3 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h3><ul>
+<li><p>找入度为0</p>
+</li>
+<li><p>访问完之后，删去结点和边</p>
+</li>
+<li><p>再找入度为0的</p>
+</li>
+<li><p>有环不能拓扑排序</p>
+</li>
+<li><p>有序的拓扑排序 —— 邻接矩阵是三角</p>
+</li>
+</ul>
+<h3 id="Prim贪心算法"><a href="#Prim贪心算法" class="headerlink" title="Prim贪心算法"></a>Prim贪心算法</h3><ul>
+<li>选点法，U 、V-U 、<ul>
+<li>U初始是 一个点</li>
+</ul>
+</li>
+<li>初始最小生成树邻近的最小权值<ul>
+<li>不能有环</li>
+</ul>
+</li>
+<li>直到 V == U</li>
+<li>n-1 条边 —— n个结点</li>
+</ul>
+<h3 id="Kruskal-贪心算法"><a href="#Kruskal-贪心算法" class="headerlink" title="Kruskal 贪心算法"></a>Kruskal 贪心算法</h3><ul>
+<li>选边法</li>
+<li>初始点全在U里面</li>
+<li>从小到大，选择权值小的<ul>
+<li>不能有环</li>
+</ul>
+</li>
+<li>n-1 条边 —— n个结点</li>
+</ul>
+<h3 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h3><p>源点 到 其他所有点的最短路径。</p>
+<ul>
+<li><p>路径长度递增次序</p>
+</li>
+<li><p>手工模拟</p>
+<table>
+<thead>
+<tr>
+<th>源点 0</th>
+<th>到1</th>
+<th>到2</th>
+<th>到3</th>
+<th>…</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>距离distance</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>上一个点</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+<li><p>distance 不断更新</p>
+<ul>
+<li>小于现在的才更新</li>
+<li>同时更新上一个点</li>
+</ul>
+</li>
+<li><p>每次选择distance最小的作 “起点” </p>
+<ul>
+<li>更新他的邻接点的distance</li>
+</ul>
+</li>
+</ul>
+<h3 id="关键路径"><a href="#关键路径" class="headerlink" title="关键路径"></a>关键路径</h3><ul>
+<li>关键路径 —— 最长的一条</li>
+<li>&lt; i , j &gt;</li>
+<li>Ve( j ) = Ve( i ) + 权值<ul>
+<li>取大的</li>
+<li>从前往后</li>
+</ul>
+</li>
+<li>Vl( i ) = Vl( j ) - 权值<ul>
+<li>取小的</li>
+<li>从后往前</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>DFS、BFS</li>
+<li>拓扑</li>
+<li>Prim</li>
+<li>Kruskal</li>
+<li>Dijkstra</li>
+<li>关键路径</li>
+</ul>
+<h2 id="04-线性结构"><a href="#04-线性结构" class="headerlink" title="04 线性结构"></a>04 线性结构</h2><h3 id="栈、FILO"><a href="#栈、FILO" class="headerlink" title="栈、FILO"></a>栈、FILO</h3><h4 id="入栈顺序到出栈顺序"><a href="#入栈顺序到出栈顺序" class="headerlink" title="入栈顺序到出栈顺序"></a>入栈顺序到出栈顺序</h4><ul>
+<li>暗含着可以边出边进</li>
+<li><strong>卡特兰数</strong> —— 所有可能的合法的，数目</li>
+<li><strong>以 X 开头的</strong></li>
+<li><strong>如果编号大的先出来了 —— 其后的是逆序    !!!!</strong></li>
+</ul>
+<h4 id="符合某规则的出栈序列"><a href="#符合某规则的出栈序列" class="headerlink" title="符合某规则的出栈序列"></a>符合某规则的出栈序列</h4><ul>
+<li>变量名：字母下划线开头<ul>
+<li>数字不行</li>
+</ul>
+</li>
+</ul>
+<h3 id="队列假溢出"><a href="#队列假溢出" class="headerlink" title="队列假溢出"></a>队列假溢出</h3><ul>
+<li><p>队头出，队尾进</p>
+<ul>
+<li>队尾元素指向元素</li>
+<li>队头指向元素前空的</li>
+</ul>
+</li>
+<li><p>拓展：双端队列</p>
+</li>
+<li><p>循环队列解决：%</p>
+<ul>
+<li>牺牲一个空间来区分队列 空 / 满<ul>
+<li>标志位tag法（空/非空）、计数器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>牺牲</p>
+<ul>
+<li>满 —— (rear +1) % max == front</li>
+<li>空 —— rear == front</li>
+</ul>
+</li>
+<li><p>标志位</p>
+<ul>
+<li>满 —— tag == 1 &amp;&amp; front == rear</li>
+<li>空 —— tag == 0</li>
+</ul>
+</li>
+</ul>
+<h3 id="栈：中缀转后缀"><a href="#栈：中缀转后缀" class="headerlink" title="栈：中缀转后缀"></a>栈：中缀转后缀</h3><p>后缀表达式，无括号、不用考虑优先级别</p>
+<ul>
+<li>optr一个栈，存运算符<ul>
+<li>栈外优先级高 —— 入栈</li>
+<li>栈外有限级低 —— 出栈</li>
+</ul>
+</li>
+<li>数字直接写入后缀表达式</li>
+<li>最后把栈中的运算符弹出</li>
+</ul>
+<ul>
+<li>技巧<ul>
+<li>加括号 —— 移动运算符 —— 删除（）</li>
+</ul>
+</li>
+</ul>
+<h3 id="栈：求值后缀表达式"><a href="#栈：求值后缀表达式" class="headerlink" title="栈：求值后缀表达式"></a>栈：求值后缀表达式</h3><ul>
+<li>扫描，不用考虑括号和运算符优先级别</li>
+<li>数字，压栈</li>
+<li>运算符，两个数字出栈运算得到结果，<ul>
+<li>结果再入栈</li>
+</ul>
+</li>
+</ul>
+<h3 id="字符串-next、nextval"><a href="#字符串-next、nextval" class="headerlink" title="字符串 next、nextval"></a>字符串 next、nextval</h3><ul>
+<li>next<ul>
+<li>子串 —— 首、尾串<ul>
+<li>首串尾串不能完全重叠</li>
+</ul>
+</li>
+<li>1,2对应是 -1  和   0</li>
+</ul>
+</li>
+<li><strong>nextval</strong> <ul>
+<li><strong>第一个是 -1</strong></li>
+<li><strong>和下标是next的字符比较</strong><ul>
+<li><strong>相同 —— 继承  nextval</strong></li>
+<li><strong>不同 —— 使用自己的next</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BF算法<ul>
+<li>i  *  j 次匹配</li>
+<li>i，j 都回溯</li>
+</ul>
+</li>
+<li>KMP<ul>
+<li>i  不回溯， 只有 j  回溯<ul>
+<li>j  回溯到 <strong>nextval</strong> 下标位置</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结-3"><a href="#总结-3" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>栈，进、出序列</li>
+<li>队列判断 空满</li>
+<li>栈： 后缀</li>
+<li>next 和 nextval</li>
+</ul>
+<h2 id="05-概述"><a href="#05-概述" class="headerlink" title="05 概述"></a>05 概述</h2><h3 id="时间复杂度-——-频度"><a href="#时间复杂度-——-频度" class="headerlink" title="时间复杂度 —— 频度"></a>时间复杂度 —— 频度</h3><ul>
+<li>*=2  ——  log2(N)  —— 步长</li>
+<li>常量阶 —— O(1)</li>
+</ul>
+<h3 id="算法特性-⑤"><a href="#算法特性-⑤" class="headerlink" title="算法特性 ⑤"></a>算法特性 ⑤</h3><ol>
+<li>有穷 —— 步骤和时间</li>
+<li>确定 —— 无二义性</li>
+<li>可行 —— 已经实现的基本操作实现</li>
+<li>输入 —— 可以是 0 个</li>
+<li>输出 —— 不可以是 0 个</li>
+</ol>
+<h3 id="算法评估"><a href="#算法评估" class="headerlink" title="算法评估"></a>算法评估</h3><ol>
+<li>正确</li>
+<li>易读/可读 —— 调试、修改、扩充</li>
+<li>健壮</li>
+<li>高效 —— 时间、空间</li>
+</ol>
+<h3 id="数据结构的——三要素"><a href="#数据结构的——三要素" class="headerlink" title="数据结构的——三要素"></a>数据结构的——<em>三要素</em></h3><ul>
+<li>逻辑结构<ul>
+<li>二类：线性、非线性<ul>
+<li>线性表：数组、链表、栈、队列、字符串、广义表</li>
+<li>非线性：树、图</li>
+</ul>
+</li>
+<li>四类：线性表、集合、树、图</li>
+</ul>
+</li>
+<li>存储结构<ul>
+<li>顺序、链式、索引、散列</li>
+</ul>
+</li>
+<li>运算 ： 查找、插入、删除、修改、排序</li>
+</ul>
+<h3 id="逻辑结构"><a href="#逻辑结构" class="headerlink" title="逻辑结构"></a>逻辑结构</h3><ul>
+<li>两类<ul>
+<li>线性</li>
+<li>非线性</li>
+</ul>
+</li>
+<li>四类<ul>
+<li>线性</li>
+<li>集合</li>
+<li>树</li>
+<li>图</li>
+</ul>
+</li>
+</ul>
+<h3 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h3><ul>
+<li>顺序、链式、索引、散列</li>
+</ul>
+<h2 id="06-AVL平衡二叉树（最佳二叉排序树）"><a href="#06-AVL平衡二叉树（最佳二叉排序树）" class="headerlink" title="06 AVL平衡二叉树（最佳二叉排序树）"></a>06 AVL平衡二叉树（最佳二叉排序树）</h2><ul>
+<li><p>树退化成单支树，优势不复存在</p>
+</li>
+<li><p>越矮越丰满查找效率越高</p>
+</li>
+<li><p>满/完全二叉树最好，但是难做 —— 转向AVL</p>
+</li>
+<li><p>AVL：所有结点，<strong>bf &lt;=1</strong></p>
+<ul>
+<li><p><strong>不一定是完全二叉树</strong></p>
+</li>
+<li><p>平衡因子 bf ：结点左右子树的高度差</p>
+</li>
+<li><p>最大高度证明是：</p>
+</li>
+<li><p>$$<br>   1.44*log(N+2)-1.328<br>   $$</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="调整平衡"><a href="#调整平衡" class="headerlink" title="调整平衡"></a>调整平衡</h3><ul>
+<li>由于会调整，导致插入的元素不一定作叶子</li>
+</ul>
+<h4 id="LL型调整"><a href="#LL型调整" class="headerlink" title="LL型调整"></a>LL型调整</h4><ul>
+<li>找到<strong>值</strong>中间那个做根节点</li>
+</ul>
+<h4 id="RR型调整"><a href="#RR型调整" class="headerlink" title="RR型调整"></a>RR型调整</h4><ul>
+<li>找到<strong>值</strong>中间那个作根节点</li>
+</ul>
+<h4 id="LR型调整"><a href="#LR型调整" class="headerlink" title="LR型调整"></a>LR型调整</h4><ul>
+<li>找到<strong>值</strong>中间那个作根节点</li>
+<li>最后要符合L&lt;N&lt;R</li>
+</ul>
+<h4 id="RL型调整"><a href="#RL型调整" class="headerlink" title="RL型调整"></a>RL型调整</h4><ul>
+<li>同LR</li>
+</ul>
+<h3 id="构造-1"><a href="#构造-1" class="headerlink" title="构造"></a>构造</h3><ul>
+<li>构造排序二叉树那一套</li>
+<li>随时注意不平衡<ul>
+<li>调整 —— 四个类型</li>
+<li>找bf &gt;1 的结点（最矮的失衡结点开始）</li>
+</ul>
+</li>
+</ul>
+<h3 id="判断平衡二叉树"><a href="#判断平衡二叉树" class="headerlink" title="判断平衡二叉树"></a>判断平衡二叉树</h3><ul>
+<li>所有结点 bf &lt; = 1</li>
+</ul>
+<h3 id="根节点失衡"><a href="#根节点失衡" class="headerlink" title="根节点失衡"></a>根节点失衡</h3><ul>
+<li>沿着最长的分支找3个结点</li>
+<li>值处于中间的 —— 作根</li>
+<li>L&lt;N&lt;R</li>
+</ul>
+<h3 id="AVL树是一棵排序树"><a href="#AVL树是一棵排序树" class="headerlink" title="AVL树是一棵排序树"></a>AVL树是一棵排序树</h3><ul>
+<li><p>中序遍历 </p>
+<ul>
+<li>L&lt;N&lt;R —— 升序</li>
+<li>L&gt;N&gt;R —— 降序</li>
+</ul>
+</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/07/25/%E6%A0%91/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BA%94%E7%94%A8%E9%A2%98%E8%80%83%E7%82%B9/" rel="tag">应用题考点</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/07/25/%E7%A2%B0%E5%88%B0%E7%9A%84%E6%9C%AF%E8%AF%AD%E4%BB%AC/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            碰到的术语们
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/25/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8+%E5%8F%8C%E9%93%BE%E8%A1%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">循环链表 + 双链表</div>
+      </a>
+    
+  </nav>
+
+  
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> 高熙旺1999
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="课设作业"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签云</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/playlist">歌单</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+  </div>
+
+</body>
+
+</html>

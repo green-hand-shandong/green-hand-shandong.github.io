@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="hexo，博客， 代码， 数据结构， 算法" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>
+        插入/交换排序 |  课设作业
+      </title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+ 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+ 
+<link rel="stylesheet" href="/css/custom.css">
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+ 
+
+    <link rel="alternate" href="/atom.xml" title="课设作业" type="application/atom+xml">
+</head>
+
+    <link rel="stylesheet" href="/css/tags.css" media="all" />
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-插入-交换排序"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  插入/交换排序
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/25/%E6%8F%92%E5%85%A5-%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2020-07-25T04:59:28.000Z" itemprop="datePublished">2020-07-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">7 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="00-考点"><a href="#00-考点" class="headerlink" title="00 考点"></a>00 考点</h3><ul>
+<li><p>插入 —— 直接、折半、希尔</p>
+</li>
+<li><p>交换 —— 冒泡、快速</p>
+</li>
+<li><p>高频考点 —— <strong>手工模拟算法，每一趟排序的结果</strong></p>
+</li>
+<li><p>10%</p>
+</li>
+</ul>
+<h3 id="01-知识"><a href="#01-知识" class="headerlink" title="01 知识"></a>01 知识</h3><ul>
+<li><p>按照关键字，形成非递减/非递增的序列</p>
+<ul>
+<li>内排序：数据量小，内存中</li>
+<li>外排序：数据量大，外存中存储，内存中排序</li>
+<li>稳定性：相同关键字的相对位置不变</li>
+</ul>
+</li>
+<li><p>衡量标准</p>
+<ul>
+<li>T(n)、S(n)、算法本身的繁杂程度</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>直接插入排序 Straight Insertion Sort：</p>
+<ul>
+<li>原序列 data[0,1,2….,n-1]</li>
+<li>初始化是data[0]自己形成有序序列</li>
+<li>依次将 data[ i ]插入到 0~i-1 有序子列中去</li>
+</ul>
+</li>
+<li><p>移动元素的策略</p>
+<ul>
+<li><p>temp 保存要插入的元素，之后找到位置，向后移动腾空。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接插入</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">void</span> <span class="title">straight_Sort</span>(<span class="title">T</span> <span class="title">data</span>[],<span class="title">int</span> <span class="title">size</span>)&#123;</span></span><br><span class="line">    <span class="keyword">int</span> pos,j;</span><br><span class="line">    T temp;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始data[0]是有序的</span></span><br><span class="line">    <span class="keyword">for</span>(pos=<span class="number">1</span>; pos&lt;size; ++pos)&#123;	<span class="comment">//遍历向量</span></span><br><span class="line">        temp = data[pos];	<span class="comment">//对于 data[j]</span></span><br><span class="line">        <span class="keyword">for</span>(j=pos<span class="number">-1</span>; temp&lt;data[j]; --j)<span class="comment">//后向前移动比大于data[j]的</span></span><br><span class="line">            data[j+<span class="number">1</span>] = data[j];</span><br><span class="line">        data[j+<span class="number">1</span>] = temp;<span class="comment">//插入</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>稳定</p>
+</li>
+<li><p>空间 O(1)</p>
+</li>
+<li><p>最好 —— 比较n-1，移动2(n-1)，O(n)</p>
+</li>
+<li><p>最差 —— O(n^2)</p>
+<ul>
+<li>比较 —— n*(n-1)/2        == Σ i</li>
+<li>移动 —— (n-1)(n+4)/2   == Σ( i + 2 )</li>
+</ul>
+</li>
+<li><p>适用于排序元素较少，基本有序(效率最高)</p>
+</li>
+</ul>
+</li>
+<li><p>折半插入排序</p>
+<ul>
+<li><p>折半查找，查找插入位置</p>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">void</span> <span class="title">BinaryInsert_Sort</span>(<span class="title">T</span> <span class="title">data</span>[],<span class="title">int</span> <span class="title">size</span>)&#123;</span></span><br><span class="line">    <span class="keyword">int</span> pos,j, low, high, mid;</span><br><span class="line">    T temp;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始data[0]是有序的</span></span><br><span class="line">    <span class="keyword">for</span>(pos=<span class="number">1</span>; pos&lt;size; ++pos)&#123;	<span class="comment">//遍历向量</span></span><br><span class="line">        temp = data[pos];	<span class="comment">//对于 data[j]</span></span><br><span class="line">        low = <span class="number">0</span>;</span><br><span class="line">        high = pos - <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(low &lt;= high)&#123;</span><br><span class="line">            mid = (low+high)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(temp&lt;data[mid])</span><br><span class="line">                high = mid<span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                low = mid+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// low 是大于pos的最小值</span></span><br><span class="line">        <span class="keyword">for</span>(j=pos<span class="number">-1</span>; temp&gt;low; --j)<span class="comment">//后向前移动比大于data[j]的</span></span><br><span class="line">            data[j+<span class="number">1</span>] = data[j];</span><br><span class="line">        data[low] = temp;<span class="comment">//插入</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>T(n) = O(n^2)<ul>
+<li>减少比较但是，不减少移动</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>希尔排序( 缩小增量排序 )</p>
+<ul>
+<li><p>减少记录个数（分组） &amp; 基本有序（分别排序）</p>
+</li>
+<li><p>待划分的记录划分成几组，间距相同的分作一组，进行直接插入排序，最后对整个记录直接插入排序</p>
+<ul>
+<li><p>直接插入 —— 比较+记录+移动</p>
+<blockquote>
+<ul>
+<li>选取增量，gap &lt; n。分成gap组</li>
+<li>间距为gap的进行直接插入排序</li>
+<li>缩小增量gap直到1（例如：5,3,1）</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>gap选取</p>
+<ul>
+<li><p>Shell提出<code>gap /= 2</code>，但是可能存在重复划分 </p>
+<ul>
+<li>gap = 8,4,2</li>
+</ul>
+</li>
+<li><p>Knuth教授：<code>gap = gap/3 + 1</code>，</p>
+</li>
+<li><p>Hibbard ：gap = 2^k - 1</p>
+</li>
+<li><p>共识 —— 尽量选取质数、第一个 &lt; n，做后一个是1。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">Shell_Sort</span>(<span class="title">T</span> <span class="title">data</span>[], <span class="title">int</span> <span class="title">size</span>)&#123;</span></span><br><span class="line">    <span class="keyword">int</span> gap, pos, j;</span><br><span class="line">    T temp;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(gap=size/<span class="number">2</span>; gap&gt;<span class="number">0</span>; ++pos)&#123;<span class="comment">//gap变化</span></span><br><span class="line">        <span class="keyword">for</span>(pos=gap; pos&lt;size; ++pos)&#123;<span class="comment">//直接插入排序</span></span><br><span class="line">            temp = data[pos];</span><br><span class="line">            <span class="keyword">for</span>(j=pos-gap; j&gt;=o &amp;&amp; data[j]&gt;temp; j-=gap)<span class="comment">//查找位置，从后往前找</span></span><br><span class="line">                data[j+gap] = data[j];</span><br><span class="line">            data[j+gap] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>不稳定 —— 大跨度的元素移动</p>
+</li>
+<li><p>不同gap，性能不同 </p>
+</li>
+<li><p>Shell —— O( n^(1.3) )</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>交换</p>
+<ul>
+<li><p>冒泡排序</p>
+<blockquote>
+<p>相邻元素关键字值比较，如果不满足排序要求(逆序)，则交换</p>
+</blockquote>
+<ul>
+<li><p>每一趟排序，确定一个最值(位置在尾巴上)</p>
+</li>
+<li><p>不交换 —— 结束</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">void</span> <span class="title">Bubble_Sort</span>(<span class="title">T</span> <span class="title">data</span>[], <span class="title">int</span> <span class="title">size</span>)&#123;</span></span><br><span class="line">    <span class="keyword">int</span> i,j;</span><br><span class="line">    <span class="keyword">bool</span> flag;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;size&amp;&amp;flag; ++i)&#123;</span><br><span class="line">        flag =<span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span>(data[j+<span class="number">1</span>]&lt;data[j])&#123;</span><br><span class="line">            swap(data[j], data[j+<span class="number">1</span>]);</span><br><span class="line">            flag = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最少 —— O(n) —— 原序列有序，只一趟比较</p>
+</li>
+<li><p>最差 —— O(n^2) —— 正好逆序</p>
+<ul>
+<li>Σ( n-i )</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>快速排序，目前最快的内部排序 (分区交换排序)</p>
+<ul>
+<li><p>冒泡一次消除一个，快排一次消除多个逆序对</p>
+<blockquote>
+<ul>
+<li>选择轴值</li>
+<li>划分成两个子序列L&amp;R<ul>
+<li>L中所有的记录 &lt; 轴值</li>
+<li>R中所有的记录 &gt; 轴值</li>
+</ul>
+</li>
+<li>递归到分组只有一个记录</li>
+</ul>
+</blockquote>
+</li>
+<li><p>轴值的选择</p>
+<ul>
+<li>第一个元素<ul>
+<li>对于有序序列糟糕的划分，退化成O(n^2)</li>
+</ul>
+</li>
+<li>随机<ul>
+<li>很少能选到最差的，随机数的选择是比较花时间的</li>
+</ul>
+</li>
+<li>取N个数，再取中值<ul>
+<li>均匀划分</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>选的轴值相当于临时变量</p>
+</li>
+<li><p>一趟过程</p>
+<blockquote>
+<ul>
+<li>两头low，high指针，交叉移动<ul>
+<li>high 向左扫描，遇到比pivot小的停止，data[low] = data[high]</li>
+<li>low   向右扫描，遇到比pivot大的停止,  data[high] = data[low]</li>
+</ul>
+</li>
+<li>最后low == high —— 轴值元素位置</li>
+</ul>
+</blockquote>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">int</span> <span class="title">partition</span>(<span class="title">T</span> <span class="title">data</span>[], <span class="title">int</span> <span class="title">low</span>, <span class="title">int</span> <span class="title">high</span>)&#123;</span></span><br><span class="line">    	T temp = data[low];<span class="comment">//pivot</span></span><br><span class="line">    	<span class="keyword">while</span>(low!=high)&#123;<span class="comment">//一趟</span></span><br><span class="line">            <span class="keyword">while</span>(low&lt;high &amp;&amp; data[high]&gt;=temp);<span class="comment">//high移动</span></span><br><span class="line">            <span class="keyword">if</span>(low &lt; high)&#123;</span><br><span class="line">                data[low] = data[high];</span><br><span class="line">                ++low;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(low &lt; high &amp;&amp; data[low]&lt;=temp);<span class="comment">//low移动</span></span><br><span class="line">            <span class="keyword">if</span>(low&lt;high)&#123;</span><br><span class="line">                data[high] = data[low];</span><br><span class="line">                --high;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    	data[low] = temp;</span><br><span class="line">    	<span class="keyword">return</span> low;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Quick_Sort</span><span class="params">(T data[], <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivot;</span><br><span class="line">    <span class="keyword">if</span>(low&gt;=high)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    pivot = partition(data, low, high);<span class="comment">//轴值位置</span></span><br><span class="line">    Quick_Sort(data, low, pivot<span class="number">-1</span>);</span><br><span class="line">    Quick_Sort(data, pivot+<span class="number">1</span>, high);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>每一趟确定一个轴值到最终位置</li>
+</ul>
+</li>
+<li><p>性能</p>
+<ul>
+<li>不稳定  —— 大跨度的数据移动</li>
+<li>S(n) = O( log2(n) )</li>
+<li>时间<ul>
+<li>平均 —— O(log2(n))  —— 最好的内部排序</li>
+<li>最差 —— O(n^2)  —— 有序 的 <strong>比较次数</strong></li>
+</ul>
+</li>
+<li>适用于，记录较多，且基本无序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-习题"><a href="#02-习题" class="headerlink" title="02 习题"></a>02 习题</h3><ul>
+<li>希尔排序第一趟后，猜gap<ul>
+<li>结果应该是：gap组（每组 n/gap 个，组内有序）</li>
+<li>组内直接插入排序</li>
+</ul>
+</li>
+<li>每趟快速排序之后，至少完全确定一个 pivot 。</li>
+<li>查找第 j 个元素<ul>
+<li>利用快排思想</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>一个划分函数，返回轴值的索引 i 。<ul>
+<li>i == j</li>
+<li>i  &lt;  j  —— 往大的那边找</li>
+<li>i  &gt;  j  —— 往小的那边找</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Find_jth</span><span class="params">(T data[], <span class="keyword">int</span> size)</span></span>&#123;</span><br><span class="line">    i = partition(data,<span class="number">1</span>,n);</span><br><span class="line">    <span class="keyword">while</span>(i!=j)&#123;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;j)</span><br><span class="line">            i = partition(data,i+<span class="number">1</span>,n);</span><br><span class="line">        <span class="keyword">if</span>(j&lt;i)</span><br><span class="line">            i = partition(data,<span class="number">1</span>,i<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(T data[], <span class="keyword">int</span> <span class="number">1</span>, <span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">1</span>, j=n, x=data[i].key;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j &amp;&amp; data[j].key&gt;=x)</span><br><span class="line">            j--;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;j)</span><br><span class="line">            data[i++] = data[j];</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j &amp;&amp; data[i].key &lt;=x)</span><br><span class="line">            i++;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;j)</span><br><span class="line">            data[j--] = data[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>颜色排序（荷兰国旗）</li>
+</ul>
+<blockquote>
+<ul>
+<li>红R、白W、蓝B。三个指针ijk<strong>（j是工作指针，ik是标志指针）</strong><ul>
+<li>初始位置<ul>
+<li>i == j 在最前面</li>
+<li>k在最后面</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>快排一趟，W从 i 开始。<ul>
+<li>R  —— 交换到最前面 —— swap( data[j] , data[i] );  i++ ;  j++;</li>
+<li>W —— 不管 —— j++ </li>
+<li>B  ——  交换到最后    —— swap( data[j] , data[k]);  k–;</li>
+</ul>
+</li>
+<li>j &gt; k 终止</li>
+</ul>
+</blockquote>
+<ul>
+<li>排序的主要操作 <ul>
+<li>比较  +  移动</li>
+</ul>
+</li>
+<li>稳不稳定 —— 指的是关键字相同的相对位置</li>
+<li>希尔排序<ul>
+<li>gap序列插入排序</li>
+<li>最后直接插入排序</li>
+</ul>
+</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/07/25/%E6%8F%92%E5%85%A5-%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8F%92%E5%85%A5-%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F/" rel="tag">插入/交换排序</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/07/25/%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            图的遍历
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A6%82%E5%BF%B5%E5%92%8C%E6%9C%AF%E8%AF%AD/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">数据结构相关术语</div>
+      </a>
+    
+  </nav>
+
+  
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> 高熙旺1999
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="课设作业"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签云</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/playlist">歌单</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+  </div>
+
+</body>
+
+</html>

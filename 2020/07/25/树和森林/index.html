@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="hexo，博客， 代码， 数据结构， 算法" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>
+        树和森林 |  课设作业
+      </title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+ 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+ 
+<link rel="stylesheet" href="/css/custom.css">
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+ 
+
+    <link rel="alternate" href="/atom.xml" title="课设作业" type="application/atom+xml">
+</head>
+
+    <link rel="stylesheet" href="/css/tags.css" media="all" />
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-树和森林"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  树和森林
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/25/%E6%A0%91%E5%92%8C%E6%A3%AE%E6%9E%97/" class="article-date">
+  <time datetime="2020-07-25T04:59:28.000Z" itemprop="datePublished">2020-07-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/DS/">DS</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">6 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="00-考点"><a href="#00-考点" class="headerlink" title="00 考点"></a>00 考点</h3><ul>
+<li>树的存储结构，树、森林和二叉树的相互转换、树和森林的遍历运算和基本运算</li>
+<li>高频：树、森林、二叉树的相互转换</li>
+<li>主要客观题，算法少</li>
+</ul>
+<h3 id="01-知识"><a href="#01-知识" class="headerlink" title="01 知识"></a>01 知识</h3><ul>
+<li><p>了解，双亲表示法：两个域的数组，data、parent。</p>
+<ul>
+<li>方便找结点双亲、查找孩子难、顺序存储结构</li>
+</ul>
+</li>
+<li><p>了解，孩子表示法</p>
+<ul>
+<li>结点的度，设置结点的指针个数</li>
+<li>data、child1、child2、child3、child4</li>
+<li>节省存储。<strong>不同的数据元素节点构造不一样</strong>。操作不便</li>
+</ul>
+</li>
+<li><p>了解，孩子表示法</p>
+<ul>
+<li>按照树的度进行设置指针个数</li>
+</ul>
+</li>
+<li><p>了解，孩子链表法</p>
+<ul>
+<li>顺序（结点） + 链表（孩子）</li>
+<li>找孩子容易，找双亲难</li>
+</ul>
+</li>
+<li><p>了解，双亲孩子链表法</p>
+<ul>
+<li>顺序（结点+parent）+链表（孩子）</li>
+</ul>
+</li>
+<li><p><strong>重点</strong>，左孩子右兄弟表示法 / 二叉树表示法</p>
+<ul>
+<li>firstchild、data、nextSibiling(下一个兄弟)</li>
+<li>树转二叉树</li>
+</ul>
+</li>
+<li><p>树定义</p>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">elemType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">class</span> <span class="title">childSibilingTree</span>&#123;</span></span><br><span class="line">        <span class="keyword">private</span>: </span><br><span class="line">        	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">                elemType data;</span><br><span class="line">                Node* firstChild, *nextSibiling;</span><br><span class="line">                Node():firstChild(<span class="literal">NULL</span>),nextSibiling(<span class="literal">NULL</span>)&#123; &#125;</span><br><span class="line">                Node(elemType val, Node*l = <span class="literal">NULL</span>, Node*r = <span class="literal">NULL</span>)&#123;</span><br><span class="line">                    data = val; firstChild = l; nextSibiling = r;</span><br><span class="line">                &#125;<span class="comment">//</span></span><br><span class="line">                ~Node();</span><br><span class="line">            &#125;<span class="comment">//struct</span></span><br><span class="line">        	Node* root;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>树到二叉树转换</p>
+<ul>
+<li>（手工模拟）<ul>
+<li>连线，在兄弟结点之间连线，</li>
+<li>删线，每个结点除了保留与其最左孩子的连线外，删去与其他孩子之间的连线</li>
+<li>旋转，顺时针旋转 45°</li>
+</ul>
+</li>
+<li>根节点右子树一定为空，根节点没有右兄弟</li>
+</ul>
+</li>
+<li><p>森林到二叉树转换</p>
+<ul>
+<li>（手工模拟）<ul>
+<li>连线，在兄弟结点之间连线。包括森林中所有树的根节点。</li>
+<li>删线，每个结点除了保留与其最左孩子的连线外，删去与其他孩子之间的连线</li>
+<li>旋转，顺时针旋转 45°</li>
+</ul>
+</li>
+<li>所有子树的根节点都是兄弟</li>
+<li>根节点的右子树上有多少右子树根节点，森林就有多少子树。</li>
+</ul>
+</li>
+<li><p>二叉树到森林</p>
+<ul>
+<li>连线，双亲–孩子，先连成虚线</li>
+<li>删线，删除兄弟之间的连线<ul>
+<li>（节点的右指针指向孩子），删除的是根节点–右指针</li>
+</ul>
+</li>
+<li>逆时针旋转45°，虚线转实线</li>
+</ul>
+</li>
+<li><p><strong>重点：</strong>树和森林的遍历</p>
+<ul>
+<li>DFS：前序、后序</li>
+<li>BFS：层次遍历</li>
+</ul>
+</li>
+<li><p>前序</p>
+<blockquote>
+<ul>
+<li>非空<ul>
+<li>访问根节点</li>
+<li>依次前序遍历树的第 i 棵子树</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>树的前序 == 二叉树的前序</p>
+</li>
+<li><p>树的后序 == 二叉树的中序 </p>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 前序遍历树（森林）</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">elemType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">void</span> <span class="title">childSibilingTree</span>&lt;elemType&gt;:</span>:preOrder_1(Node* t)<span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(t != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; t-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">            preOrder_1(t-&gt;firstChild);</span><br><span class="line">            t = t-&gt;nextSibiling;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 前序遍历二叉树</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">elemType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">void</span> <span class="title">childSibilingTree</span>&lt;elemType&gt;:</span>:preOrder_2(Node* t)<span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(t)&#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; t-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">            preOrder_2(t-&gt;firstChild);</span><br><span class="line">            preOrder_2(t-&gt;nextSibiling);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>后序</p>
+<blockquote>
+<ul>
+<li>非空<ul>
+<li>依次后序遍历树的第 i 棵子树</li>
+<li>访问树的根节点</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 后序遍历树（森林）</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">elemType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">void</span> <span class="title">childSibilingTree</span>&lt;elemType&gt;:</span>:postOrder_1(Node* t)<span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">NULL</span> != t)&#123;</span><br><span class="line">            postOrder_1(t-&gt;firstChild);</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; t-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">            t = t-&gt;nextSibiling;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 后序遍历二叉树</span></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">elemType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">void</span> <span class="title">childSibilingTree</span>&lt;elemType&gt;:</span>:postOrder_2(Node* t)<span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(t)&#123;</span><br><span class="line">            postOrder_2(t-&gt;firstChild);</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; t-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">			postOrder_2(t-&gt;nextSibiling);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>层序遍历</p>
+<ul>
+<li><p>树 —— 编号</p>
+</li>
+<li><p>森林 —— 子树的根在同一层</p>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 借助队列,树和森林</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">elemType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">void</span> <span class="title">childSibiling</span>&lt;emelmType&gt;:</span>:levelOrderTraverse()consrt&#123;</span><br><span class="line">        <span class="built_in">queue</span>&lt;Node*&gt; Q;</span><br><span class="line">        Node* p = root;</span><br><span class="line">        <span class="keyword">while</span>(p)&#123;</span><br><span class="line">            <span class="comment">// 森林的所有根节点入队</span></span><br><span class="line">            Q.push(p);</span><br><span class="line">            p = p-&gt;nextSibiling;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">            p = Q.front(); 	<span class="comment">//取栈中的根节点</span></span><br><span class="line">            Q.pop();</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; p-&gt;data &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">            p = p-&gt;firstChild;</span><br><span class="line">            <span class="keyword">while</span>(p)&#123;</span><br><span class="line">                <span class="comment">// 当前节点的所有孩子入队</span></span><br><span class="line">                Q.push(p);</span><br><span class="line">                p = p-&gt;nextSibiling;</span><br><span class="line">            &#125;<span class="comment">//while</span></span><br><span class="line">        &#125;<span class="comment">//while</span></span><br><span class="line">    &#125;<span class="comment">// func</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>求树的高度</p>
+<blockquote>
+<ul>
+<li>空子树 —— 0</li>
+<li>非空     —— 森林的高度为 <strong>max{子树孙林的高度+1，兄弟森林的高度}</strong></li>
+</ul>
+</blockquote>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">elemType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">int</span> <span class="title">childSibilingTree</span>&lt;elemType&gt;:</span>:height(Node *t)<span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(t == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> lh = height(t-&gt;firstChild), rh = height(t-&gt;nextSibiling);</span><br><span class="line">            <span class="keyword">return</span> (<span class="number">1</span>+lh)&gt;rh?lh+<span class="number">1</span>:rh;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>求节点总数</p>
+<ul>
+<li><p>递归前序遍历树</p>
+<blockquote>
+<ul>
+<li>空子树 —— 0</li>
+<li>非空     ——  == 1 + 左子树森林的结点数 + 右子树森林的结点数</li>
+</ul>
+</blockquote>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">elemType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">int</span> <span class="title">childSibilingTree</span>&lt;elemType&gt;:</span>:size(Node* t)&#123;</span><br><span class="line">        <span class="keyword">if</span>(t == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> + size(t-&gt;firstChild) + size(t-&gt;nextSibiling);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>求叶子结点</p>
+<ul>
+<li><p>递归前序遍历树</p>
+<blockquote>
+<ul>
+<li>空子树  ——  子树节点数为0</li>
+<li>当前节点无firstChild ，那么也不会有 其他孩子—— ==1 + 兄弟森林中的叶子结点</li>
+<li>当前节点有fiestChild —— == 子树森林的叶子结点数 + 兄弟森林的叶子结点</li>
+</ul>
+</blockquote>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">elemType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">int</span> <span class="title">childSibilingTree</span>&lt;elemType&gt;:</span>:leafNum(Node* t)<span class="keyword">const</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="literal">NULL</span> == t)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(t-&gt;firstChild == <span class="literal">NULL</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span> + leafNum(t-&gt;nextSibiling);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">return</span> leafNum(t-&gt;nextChild) + leafNum(t-&gt;nextSibiling);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-习题"><a href="#02-习题" class="headerlink" title="02   习题"></a>02   习题</h3><ul>
+<li>树转换成二叉树，结点 u 是结点 v 的父节点的父节点<ul>
+<li>可能有四种 —— LL、LR、RL、RR —— 父子或者兄弟</li>
+</ul>
+</li>
+<li>叶子结点数目<ul>
+<li>n0  ==  （k-1)*nk  + 1</li>
+</ul>
+</li>
+<li>扫把形的树 —— 非叶子结点，一个一层。<ul>
+<li>转二叉树 —— 一直只有 firstchild指针非空，到一直只有nextSibiling指针非空</li>
+</ul>
+</li>
+<li>树转二叉树，叶子结点 —— firstchild指针NULL的</li>
+<li>知道森林的边和结点数 —— 子树数目<ul>
+<li>一棵树把所有边都用了，其余的都是只有root结点的树</li>
+<li>n个结点 —— n-1 条边</li>
+</ul>
+</li>
+<li>二叉树中的右孩子，在树中其实是兄弟关系</li>
+<li>二叉树的根节点的右子树，全是森林的树（除了第一棵）<ul>
+<li>左子树 —— n1 <strong>- 1</strong></li>
+<li>右子树 —— n2 + n3 + n4</li>
+</ul>
+</li>
+<li>F是个森林，B是有F变换的得到的二叉树。若F中有n个非叶子结点<ul>
+<li>B中右指针非空的有多少个</li>
+<li><strong>特殊情况推导</strong><ul>
+<li>森林只有两棵只有<strong>根节点的树</strong>，转成二叉树 —— 后验证</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>已知先序和后序，构造<strong>森林</strong><ul>
+<li>二叉树的先序和中序  ——  二叉树<ul>
+<li>先序——根</li>
+<li>中序 + 根 —— 子树</li>
+<li>子树 + 先序 —— 根 ——循环</li>
+</ul>
+</li>
+<li>二叉树转森林<ul>
+<li><strong>加线 —— 根节点 和 除了firstchild 之外的孩子加虚线</strong></li>
+<li><strong>删线 —— 所有NR线（实线）删去。</strong></li>
+<li><strong>旋转 —— 逆时针旋转 45°</strong></li>
+<li>根节点 + 左子树 —— 第一棵树</li>
+<li>右子树，每一个RR都是一个根节点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>树的后根次序 + 结点的度 ，求树<ul>
+<li>叶子结点， n0 ， 度数是0</li>
+<li>B、D、E、F、C、G、J、K、I、L、H、A、</li>
+<li>0、0、0、0、3、0、0、0、2、0、2、4<ul>
+<li>DEF—— C（前面度数个结点）</li>
+<li>JK   ——  I  </li>
+<li>IL    —— H</li>
+<li>BCGH  —— A  ( 前面没出现过的 )</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/07/25/%E6%A0%91%E5%92%8C%E6%A3%AE%E6%9E%97/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%91%E5%92%8C%E6%A3%AE%E6%9E%97/" rel="tag">树和森林</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/07/25/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8+%E5%8F%8C%E9%93%BE%E8%A1%A8/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            循环链表 + 双链表
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/25/%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5%E5%92%8C%E6%9C%AF%E8%AF%AD/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">算法相关术语</div>
+      </a>
+    
+  </nav>
+
+  
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> 高熙旺1999
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="课设作业"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签云</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/playlist">歌单</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+  </div>
+
+</body>
+
+</html>

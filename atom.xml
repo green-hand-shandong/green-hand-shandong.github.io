@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-07-25T05:14:20.084Z</updated>
+  <updated>2020-07-29T11:28:11.833Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>markdown + latex</title>
-    <link href="http://yoursite.com/2020/07/25/markdown-latex/"/>
-    <id>http://yoursite.com/2020/07/25/markdown-latex/</id>
+    <title>455.分发饼干</title>
+    <link href="http://yoursite.com/2020/07/25/LC-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    <id>http://yoursite.com/2020/07/25/LC-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</id>
     <published>2020-07-25T04:59:28.000Z</published>
-    <updated>2020-07-25T05:14:20.084Z</updated>
+    <updated>2020-07-29T11:28:11.833Z</updated>
     
     <summary type="html">
     
@@ -36,7 +36,61 @@
     </summary>
     
     
-      <category term="工具s" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7s/"/>
+      <category term="动态规划" scheme="http://yoursite.com/categories/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+    
+      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VScode 配置记录</title>
+    <link href="http://yoursite.com/2020/07/25/VScode%E5%B0%8F%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/2020/07/25/VScode%E5%B0%8F%E8%AE%B0%E5%BD%95/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T11:53:36.233Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
+    
+    
+      <category term="VScode" scheme="http://yoursite.com/tags/VScode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>markdown + latex</title>
+    <link href="http://yoursite.com/2020/07/25/markdown-latex/"/>
+    <id>http://yoursite.com/2020/07/25/markdown-latex/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T09:21:09.821Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
     
     
       <category term="markdown-latex" scheme="http://yoursite.com/tags/markdown-latex/"/>
@@ -44,11 +98,11 @@
   </entry>
   
   <entry>
-    <title>c/c++学习</title>
-    <link href="http://yoursite.com/2020/07/25/c-c/"/>
-    <id>http://yoursite.com/2020/07/25/c-c/</id>
-    <published>2020-07-25T03:47:19.000Z</published>
-    <updated>2020-07-25T05:01:31.754Z</updated>
+    <title>Git们</title>
+    <link href="http://yoursite.com/2020/07/25/Git%E5%85%84%E5%BC%9F%E4%BB%AC/"/>
+    <id>http://yoursite.com/2020/07/25/Git%E5%85%84%E5%BC%9F%E4%BB%AC/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T12:24:48.584Z</updated>
     
     <summary type="html">
     
@@ -63,19 +117,19 @@
     </summary>
     
     
-      <category term="PL" scheme="http://yoursite.com/categories/PL/"/>
+      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
     
     
-      <category term="C/C++" scheme="http://yoursite.com/tags/C-C/"/>
+      <category term="Git-" scheme="http://yoursite.com/tags/Git/"/>
     
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://yoursite.com/2020/07/24/hello-world/"/>
-    <id>http://yoursite.com/2020/07/24/hello-world/</id>
-    <published>2020-07-24T11:06:59.815Z</published>
-    <updated>2020-07-24T11:06:59.815Z</updated>
+    <title>鸢尾花-sklearn-KNN</title>
+    <link href="http://yoursite.com/2020/07/25/sklearn-%E9%B8%A2%E5%B0%BE%E8%8A%B1-KNN/"/>
+    <id>http://yoursite.com/2020/07/25/sklearn-%E9%B8%A2%E5%B0%BE%E8%8A%B1-KNN/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T12:07:57.195Z</updated>
     
     <summary type="html">
     
@@ -90,6 +144,413 @@
     </summary>
     
     
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="sklearn" scheme="http://yoursite.com/tags/sklearn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo 配置记录</title>
+    <link href="http://yoursite.com/2020/07/25/hexo%E5%B0%8F%E8%AE%B0%E5%BD%95/"/>
+    <id>http://yoursite.com/2020/07/25/hexo%E5%B0%8F%E8%AE%B0%E5%BD%95/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T12:22:31.375Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>串</title>
+    <link href="http://yoursite.com/2020/07/25/%E4%B8%B2/"/>
+    <id>http://yoursite.com/2020/07/25/%E4%B8%B2/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T09:00:05.211Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="DS" scheme="http://yoursite.com/categories/DS/"/>
+    
+    
+      <category term="串" scheme="http://yoursite.com/tags/%E4%B8%B2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>二叉树</title>
+    <link href="http://yoursite.com/2020/07/25/%E4%BA%8C%E5%8F%89%E6%A0%91/"/>
+    <id>http://yoursite.com/2020/07/25/%E4%BA%8C%E5%8F%89%E6%A0%91/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T09:03:49.795Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="DS" scheme="http://yoursite.com/categories/DS/"/>
+    
+    
+      <category term="树" scheme="http://yoursite.com/tags/%E6%A0%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关键路径</title>
+    <link href="http://yoursite.com/2020/07/25/%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84/"/>
+    <id>http://yoursite.com/2020/07/25/%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T09:19:34.322Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="关键路径" scheme="http://yoursite.com/tags/%E5%85%B3%E9%94%AE%E8%B7%AF%E5%BE%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Huffman树</title>
+    <link href="http://yoursite.com/2020/07/25/Huffman%E6%A0%91/"/>
+    <id>http://yoursite.com/2020/07/25/Huffman%E6%A0%91/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T09:20:59.701Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="Huffman" scheme="http://yoursite.com/tags/Huffman/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图的定义和存储</title>
+    <link href="http://yoursite.com/2020/07/25/%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E5%82%A8%E5%AD%98/"/>
+    <id>http://yoursite.com/2020/07/25/%E5%9B%BE%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E5%82%A8%E5%AD%98/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T09:08:09.569Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="DS" scheme="http://yoursite.com/categories/DS/"/>
+    
+    
+      <category term="定义" scheme="http://yoursite.com/tags/%E5%AE%9A%E4%B9%89/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>鸢尾花-sklearn-决策树</title>
+    <link href="http://yoursite.com/2020/07/25/sklearn-%E9%B8%A2%E5%B0%BE%E8%8A%B1-dt/"/>
+    <id>http://yoursite.com/2020/07/25/sklearn-%E9%B8%A2%E5%B0%BE%E8%8A%B1-dt/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T12:05:45.673Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="sklearn" scheme="http://yoursite.com/tags/sklearn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>单链表</title>
+    <link href="http://yoursite.com/2020/07/25/%E5%8D%95%E9%93%BE%E8%A1%A8/"/>
+    <id>http://yoursite.com/2020/07/25/%E5%8D%95%E9%93%BE%E8%A1%A8/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T08:53:11.139Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="DS" scheme="http://yoursite.com/categories/DS/"/>
+    
+    
+      <category term="链表" scheme="http://yoursite.com/tags/%E9%93%BE%E8%A1%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>统计</title>
+    <link href="http://yoursite.com/2020/07/25/%E6%80%BB%E4%BD%93%E7%BB%9F%E8%AE%A1/"/>
+    <id>http://yoursite.com/2020/07/25/%E6%80%BB%E4%BD%93%E7%BB%9F%E8%AE%A1/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T13:45:24.131Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+    
+      <category term="统计" scheme="http://yoursite.com/tags/%E7%BB%9F%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>动态查找表</title>
+    <link href="http://yoursite.com/2020/07/25/%E5%8A%A8%E6%80%81%E6%9F%A5%E6%89%BE%E8%A1%A8/"/>
+    <id>http://yoursite.com/2020/07/25/%E5%8A%A8%E6%80%81%E6%9F%A5%E6%89%BE%E8%A1%A8/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T09:17:58.955Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="DS" scheme="http://yoursite.com/categories/DS/"/>
+    
+    
+      <category term="查找" scheme="http://yoursite.com/tags/%E6%9F%A5%E6%89%BE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>排序总结</title>
+    <link href="http://yoursite.com/2020/07/25/%E6%8E%92%E5%BA%8F%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2020/07/25/%E6%8E%92%E5%BA%8F%E6%80%BB%E7%BB%93/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T09:29:06.633Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="排序总结" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>拓扑排序</title>
+    <link href="http://yoursite.com/2020/07/25/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/"/>
+    <id>http://yoursite.com/2020/07/25/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T09:20:20.704Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="拓扑排序" scheme="http://yoursite.com/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>图的遍历</title>
+    <link href="http://yoursite.com/2020/07/25/%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/"/>
+    <id>http://yoursite.com/2020/07/25/%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T09:20:28.095Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="图的遍历" scheme="http://yoursite.com/tags/%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>插入/交换排序</title>
+    <link href="http://yoursite.com/2020/07/25/%E6%8F%92%E5%85%A5-%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F/"/>
+    <id>http://yoursite.com/2020/07/25/%E6%8F%92%E5%85%A5-%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T09:25:38.959Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Algorithm" scheme="http://yoursite.com/categories/Algorithm/"/>
+    
+    
+      <category term="插入/交换排序" scheme="http://yoursite.com/tags/%E6%8F%92%E5%85%A5-%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据结构相关术语</title>
+    <link href="http://yoursite.com/2020/07/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A6%82%E5%BF%B5%E5%92%8C%E6%9C%AF%E8%AF%AD/"/>
+    <id>http://yoursite.com/2020/07/25/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%A6%82%E5%BF%B5%E5%92%8C%E6%9C%AF%E8%AF%AD/</id>
+    <published>2020-07-25T04:59:28.000Z</published>
+    <updated>2020-07-29T08:53:12.396Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="DS" scheme="http://yoursite.com/categories/DS/"/>
+    
+    
+      <category term="定义" scheme="http://yoursite.com/tags/%E5%AE%9A%E4%B9%89/"/>
     
   </entry>
   

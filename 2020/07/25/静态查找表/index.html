@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta name="description" content="hexo，博客， 代码， 数据结构， 算法" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>
+        静态查找表 |  课设作业
+      </title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+ 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+ 
+<link rel="stylesheet" href="/css/custom.css">
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+ 
+
+    <link rel="alternate" href="/atom.xml" title="课设作业" type="application/atom+xml">
+</head>
+
+    <link rel="stylesheet" href="/css/tags.css" media="all" />
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-静态查找表"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  静态查找表
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/25/%E9%9D%99%E6%80%81%E6%9F%A5%E6%89%BE%E8%A1%A8/" class="article-date">
+  <time datetime="2020-07-25T04:59:28.000Z" itemprop="datePublished">2020-07-25</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Algorithm/">Algorithm</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">4 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="00-考点"><a href="#00-考点" class="headerlink" title="00 考点"></a>00 考点</h3><ul>
+<li>顺序、折半、分块查找</li>
+<li>高频：折半查找&amp;判定树 </li>
+<li>5~10%</li>
+</ul>
+<h3 id="01-知识"><a href="#01-知识" class="headerlink" title="01 知识"></a>01 知识</h3><ul>
+<li><p>集合中数据元素没有逻辑关系</p>
+</li>
+<li><p>关键字 ： 一个数据元素区别于其他的唯一标识 （键值、关键字值）</p>
+</li>
+<li><p>集合的运算</p>
+<ul>
+<li>查找（内部、外部）</li>
+<li>按关键字排序</li>
+</ul>
+</li>
+<li><p>集合的存储</p>
+<ul>
+<li>任何容器都可</li>
+<li>常用，线性表（折半）和树（二叉查找，AVL）</li>
+<li>唯一一个适合和处理集合 —— HASH（散列表，存储 + 查找）</li>
+</ul>
+</li>
+<li><p>查找表</p>
+<ul>
+<li>静态</li>
+<li>动态</li>
+</ul>
+</li>
+<li><p>ASL 平均查找长度 Average Search Length —— 必须会算</p>
+<ul>
+<li><p>对key的平均比较次数</p>
+</li>
+<li><p>$$<br>   ASL = Σ ( P_i*C_i)<br>   $$</p>
+</li>
+<li><p>pi —— 查找第 i 个元素的概率</p>
+</li>
+<li><p>Ci —— 查找第 i 个元素需要经过的比较次数</p>
+</li>
+</ul>
+</li>
+<li><p>无序表只能顺序查找</p>
+<ul>
+<li><p>引入，监视哨兵，检索失败返回 0 </p>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">RecType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">int</span> <span class="title">seqSearch</span>(<span class="title">vector</span>&lt;RecType&gt; &amp;<span class="title">data</span>, <span class="title">const</span> <span class="title">RecType</span> &amp;<span class="title">k</span>)&#123;</span></span><br><span class="line">    	<span class="keyword">int</span> i;</span><br><span class="line">    	data[<span class="number">0</span>] = k;<span class="comment">//哨兵</span></span><br><span class="line">    	<span class="keyword">for</span>(i=data.size()<span class="number">-1</span>; k!=data[i]; --i);<span class="comment">//从后向前查找，只找位置</span></span><br><span class="line">    	<span class="comment">//体会哨兵的作用</span></span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>顺序表（被查找的元素不存在时，不需要查到表位）</p>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">RecType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">int</span> <span class="title">SortedSeqSearch</span>(<span class="title">vector</span>&lt;RecType&gt; &amp;<span class="title">data</span>, <span class="title">const</span> <span class="title">RecType</span> &amp;<span class="title">k</span>)&#123;</span></span><br><span class="line">    	<span class="keyword">int</span> i;</span><br><span class="line">    	data[<span class="number">0</span>] = k;</span><br><span class="line">    	<span class="keyword">for</span>(i=data.size()<span class="number">-1</span>; k&lt;data[i];--i);	<span class="comment">// &gt;= data[i]就会退出</span></span><br><span class="line">    	<span class="keyword">if</span>(k == data[i])</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">    	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>查找成功<ul>
+<li>ASL = 1/n * Σ(n -i -1) = 1/n * (1 + 2 +…+n) == (n+1)/2</li>
+</ul>
+</li>
+<li>失败<ul>
+<li>n+1 （监视哨兵）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>折半查找（half-interval Search）</p>
+<ul>
+<li><p>要求<strong>有序</strong>，且必须顺序存储，链表不行。</p>
+<blockquote>
+<ul>
+<li>data[mid] == k —— 成功</li>
+<li>data[mid]  &gt;  k —— 在前半段</li>
+<li>data[mid]  &lt;  k —— 在后半段</li>
+</ul>
+</blockquote>
+</li>
+<li><p>mid = (low+high) / 2</p>
+</li>
+<li><p>low &gt; high  —— 退出</p>
+   <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">RecType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">int</span> <span class="title">BinarySearch</span>(<span class="title">const</span> <span class="title">vector</span>&lt;RecType&gt; &amp;<span class="title">data</span>, <span class="title">const</span> <span class="title">RecType</span> &amp;<span class="title">k</span>)&#123;</span></span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">1</span>, high = data.size()<span class="number">-1</span>, mid;</span><br><span class="line">    <span class="keyword">while</span>(low&lt;high)&#123;</span><br><span class="line">        mid = (high + low ) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (k==data[mid])</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="keyword">if</span>(k &lt; data[mid])</span><br><span class="line">            high = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 递归</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">RecType</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">int</span> <span class="title">BinarySearch_2</span>(<span class="title">const</span> <span class="title">vector</span>&lt;RecType&gt; &amp;<span class="title">data</span>, <span class="title">const</span> <span class="title">RecType</span> &amp;<span class="title">k</span>，<span class="title">int</span> <span class="title">low</span>， <span class="title">int</span> <span class="title">high</span>&#123;</span></span><br><span class="line">        <span class="comment">// 递归常常通过参数的变化，来向下一层传递信息</span></span><br><span class="line">        <span class="keyword">if</span>(low &gt; high)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;			<span class="comment">// 出口1</span></span><br><span class="line">        <span class="keyword">int</span> mid = (high + low)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(k == data[mid])		<span class="comment">// 出口2</span></span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(k &lt; data[mid])</span><br><span class="line">            <span class="keyword">return</span> BinarySearch_2(data, k, low, mid<span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> BinarySearch_2(data, k, mid+<span class="number">1</span>, high);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>折半查找的判定树</p>
+<ul>
+<li><p>结点 —— 元素在顺序存储中的位置</p>
+<blockquote>
+<ul>
+<li>根节点 —— mid</li>
+<li>左侧 —— 左子树</li>
+<li>右侧 —— 右子树</li>
+</ul>
+</blockquote>
+</li>
+<li><p>查找</p>
+<blockquote>
+<ul>
+<li>大于结点向右走</li>
+<li>小于结点向左走</li>
+</ul>
+</blockquote>
+</li>
+<li><p>查找成功</p>
+<ul>
+<li>AVL = 1/元素个数 * （ 层数 * 该层的结点 ）</li>
+</ul>
+</li>
+<li><p>查找失败</p>
+<ul>
+<li>正则化（添加查找失败的结点）</li>
+<li>AVL = 1/外部结点个数   *   （（层数-1）  *   该层的个数 ）</li>
+</ul>
+</li>
+<li><p>最大的成功检索长度 == 最大的失败检索 == 高度</p>
+</li>
+<li><p>查找成功的平均查找长度</p>
+<ul>
+<li>ASL  ==  log2( n + 1)  -   1</li>
+</ul>
+</li>
+<li><p>O( log2(N) )</p>
+</li>
+</ul>
+</li>
+<li><p>分块查找 / 索引顺序块的查找：索引表 + 查找块</p>
+<ul>
+<li><p>处理大量数据，分成若干块</p>
+<blockquote>
+<ul>
+<li>块内的元素可以有序，也可以无序</li>
+<li>块之间必须是有序的</li>
+<li>每块不需要均匀</li>
+</ul>
+</blockquote>
+</li>
+<li><p><strong>索引表</strong> —— 块内最大的关键字、块内的起始地址</p>
+<ul>
+<li>递增有序，存储<ul>
+<li>各块中最大的关键字</li>
+<li>各块起始地址</li>
+<li>可能还需要块内存了多少个元素</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>索引表上的查找</p>
+<ul>
+<li><p>某个key</p>
+<blockquote>
+<ul>
+<li>大于某个块的最大值，不在此块内<ul>
+<li>一直找到小于某块的最大值，在这个块里</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-习题"><a href="#02-习题" class="headerlink" title="02 习题"></a>02 习题</h3><ul>
+<li>折半查找 —— 每次往一个方向缩短查找范围<ul>
+<li>找一个不存在的元素。最多比较 log2(n+1) “↑” —— 二叉树的高度</li>
+<li>不能构成折半查找关键字序列的  —— 构不成单支的树</li>
+<li>改进 —— 跳跃查找，</li>
+</ul>
+</li>
+<li>折半查找二叉树<ul>
+<li>向下取整 —— 右分支可能略长</li>
+<li>向上取整 —— 左分支可能长</li>
+<li>但是，总的不可能，有往右拐的，也有往左拐的</li>
+<li>找个 1~10 ，带入一下</li>
+</ul>
+</li>
+<li>怎么构造折半查找的二叉判定树<ul>
+<li>不是根据排好序的序列去形成</li>
+<li><strong>注意 —— 是靠选取mid，分割子序列，再找mid分割子序列</strong></li>
+<li><strong>重点是序列的mid</strong></li>
+</ul>
+</li>
+<li>折半查找的平均查找长度<ul>
+<li>画查找树—— 查找树是一棵完全二叉树，并且右分支长</li>
+<li>1/元素个数 * Σ( 层数*该层结点数 )</li>
+</ul>
+</li>
+<li>对于有序表和无序表<ul>
+<li>顺序和遍历查找 —— 成功ASL相同、失败ASL不同</li>
+</ul>
+</li>
+<li>关于折半查找 —— 首先画出判定树</li>
+</ul>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/07/25/%E9%9D%99%E6%80%81%E6%9F%A5%E6%89%BE%E8%A1%A8/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9F%A5%E6%89%BE/" rel="tag">查找</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/07/25/%E7%AE%97%E6%B3%95%E6%A6%82%E5%BF%B5%E5%92%8C%E6%9C%AF%E8%AF%AD/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            算法相关术语
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/25/%E9%98%9F%E5%88%97/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">队列</div>
+      </a>
+    
+  </nav>
+
+  
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> 高熙旺1999
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="课设作业"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签云</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/playlist">歌单</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true
+  }
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+  </div>
+
+</body>
+
+</html>
